@@ -7,25 +7,26 @@ TodoFeature.propTypes = {
 };
 
 function TodoFeature(props) {
-  const initTodoList = [
-    {
-      id: 1,
-      title: 'Eat',
-      status: 'new'
-    },
-    {
-      id: 2,
-      title: 'Sleep',
-      status: 'completed'
-    },
-    {
-      id: 3,
-      title: 'Code',
-      status: 'new'
-    }
-  ];
-
-  const [todoList, setTodoList] = useState(initTodoList);
+  const [todoList, setTodoList] = useState(() => {
+    const initTodoList = [
+      {
+        id: 1,
+        title: 'Eat',
+        status: 'new'
+      },
+      {
+        id: 2,
+        title: 'Sleep',
+        status: 'completed'
+      },
+      {
+        id: 3,
+        title: 'Code',
+        status: 'new'
+      }
+    ];
+    return initTodoList;
+  });
   const [filterStatus, setFilterStatus] = useState('all');
 
   const handleTodoClick = (todo, idx) => {
