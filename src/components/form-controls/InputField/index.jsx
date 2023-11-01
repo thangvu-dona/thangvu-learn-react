@@ -13,6 +13,9 @@ InputField.propTypes = {
 
 function InputField(props) {
   const { form, name, label, disabled } = props;
+  const { errors, formState } = form;
+  const hasError = errors[name] && formState.touched[name];
+
   return (
     <div>
       <Controller
@@ -22,6 +25,8 @@ function InputField(props) {
         fullWidth
         label={label}
         disabled={disabled}
+        error={!!hasError}
+        helperText={errors[name]?.message}
       />
     </div>
   );
