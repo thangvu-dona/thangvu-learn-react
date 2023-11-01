@@ -5,6 +5,7 @@ import AlbumFeature from './features/AlbumSong';
 import { useEffect } from 'react';
 import categoryApi from './api/categoryApi';
 import ListPage from './features/Todo/pages/ListPage';
+import CounterFeature from './features/Counter';
 
 function App() {
   useEffect(() => {
@@ -26,9 +27,12 @@ function App() {
       <p><NavLink to='/albums'>Albums</NavLink></p>
 
       <Routes>
+        <Route path='/' Component={CounterFeature} exact />
         <Route path='/todos' Component={TodoFeature} />
         <Route path='/albums' Component={AlbumFeature} />
       </Routes>
+
+      {/* <CounterFeature /> */}
 
       <ListPage />
 
