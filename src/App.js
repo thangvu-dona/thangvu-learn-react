@@ -4,6 +4,7 @@ import TodoFeature from './features/Todo';
 import AlbumFeature from './features/AlbumSong';
 import { useEffect } from 'react';
 import categoryApi from './api/categoryApi';
+import ListPage from './features/Todo/pages/ListPage';
 
 function App() {
   useEffect(() => {
@@ -28,6 +29,9 @@ function App() {
         <Route path='/todos' Component={TodoFeature} />
         <Route path='/albums' Component={AlbumFeature} />
       </Routes>
+
+      <ListPage />
+
       Footer
     </div>
   );
