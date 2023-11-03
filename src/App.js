@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import categoryApi from './api/categoryApi';
 import ListPage from './features/Todo/pages/ListPage';
 import CounterFeature from './features/Counter';
+import Header from './components/Header';
 
 function App() {
   useEffect(() => {
@@ -19,12 +20,12 @@ function App() {
 
   return (
     <div className="App">
-      Header
-      <p><Link to='/todos'>Todos</Link></p>
+      <Header />
+      {/* <p><Link to='/todos'>Todos</Link></p>
       <p><Link to='/albums'>Albums</Link></p>
 
       <p><NavLink to='/todos'>Todos</NavLink></p>
-      <p><NavLink to='/albums'>Albums</NavLink></p>
+      <p><NavLink to='/albums'>Albums</NavLink></p> */}
 
       <Routes>
         <Route path='/' Component={CounterFeature} exact />
@@ -34,7 +35,7 @@ function App() {
 
       {/* <CounterFeature /> */}
 
-      <ListPage />
+      {/* <ListPage /> */}
 
       Footer
     </div>
