@@ -69,15 +69,6 @@ export default function Header() {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <Register />
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          /> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

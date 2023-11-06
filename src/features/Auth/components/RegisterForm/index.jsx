@@ -22,11 +22,27 @@ function RegisterForm(props) {
 
   // goes schema here for translation - i18n
   const schema = yup.object().shape({
-    fullName: yup.string().required("Please enter your Fullname."),
+    fullName: yup
+      .string()
+      .required("Please enter your Fullname.")
+      .test(
+        "Should have at least two world",
+        "Please enter at least two world and 3 characters in each!",
+        (value) =>
+          value.split(" ").filter((x) => !!x && x.length >= 3).length >= 2
+      ),
     email: yup
       .string()
       .required("Please enter your Email.")
-      .email("Plese enter your valid email"),
+      .email("Please enter your valid email."),
+    password: yup
+      .string()
+      .required("Please enter your password.")
+      .min(6, "Please enter at least 6 characters."),
+    retypePassword: yup
+      .string()
+      .required("Please retype your password.")
+      .oneOf([yup.ref("password")], "Password does not match."),
   });
   const form = useForm({
     defaultValues: {
@@ -36,6 +52,15 @@ function RegisterForm(props) {
       retypePassword: "",
     },
     resolver: yupResolver(schema),
+    // resolver: async (data, context, options) => {
+    //   // you can debug your validation schema here
+    //   console.log("formData", data);
+    //   console.log(
+    //     "validation result",
+    //     await yupResolver(schema)(data, context, options)
+    //   );
+    //   return yupResolver(schema)(data, context, options);
+    // },
   });
 
   const handleFormSubmit = (values) => {

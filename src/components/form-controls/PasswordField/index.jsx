@@ -1,8 +1,7 @@
-import { Input } from "@mui/material";
+import { FormHelperText, Input } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { Controller } from "react-hook-form";
-// import * as React from "react";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import FormControl from "@mui/material/FormControl";
@@ -20,8 +19,8 @@ PasswordField.propTypes = {
 
 function PasswordField(props) {
   const { form, name, label, disabled } = props;
-  const { errors, formState } = form;
-  const hasError = errors[name] && formState.touched[name];
+  const { errors } = form;
+  const hasError = errors[name];
 
   // password
   const [showPassword, setShowPassword] = useState(false);
@@ -61,8 +60,12 @@ function PasswordField(props) {
           }
           disabled={disabled}
           error={!!hasError}
-          helperText={errors[name]?.message}
+          // helperText={errors[name]?.message} // this Input control not support helperText --> use FormHelperText instead
         />
+
+        <FormHelperText error={!!hasError}>
+          {errors[name]?.message}
+        </FormHelperText>
       </FormControl>
     </div>
   );
