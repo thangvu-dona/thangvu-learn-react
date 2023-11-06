@@ -11,8 +11,9 @@ import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Register from "features/Auth/components/Register";
 import { IconButton } from "@mui/material";
-import { Close } from "@mui/icons-material";
+import { AccountCircle, Close } from "@mui/icons-material";
 import Login from "features/Auth/components/Login";
+import { useSelector } from "react-redux";
 
 const MODE = {
   LOGIN: "login",
@@ -20,6 +21,9 @@ const MODE = {
 };
 
 export default function Header() {
+  const loggedInUser = useSelector((state) => state.user.current);
+  const isLoggedIn = !!loggedInUser.id;
+
   const [open, setOpen] = React.useState(false);
   const [mode, setMode] = React.useState(MODE.LOGIN); // state for switching mode
 
@@ -64,13 +68,21 @@ export default function Header() {
             </Button>
           </NavLink>
 
-          <Button
-            color="inherit"
-            sx={{ color: "#FFF" }}
-            onClick={handleClickOpen}
-          >
-            Register
-          </Button>
+          {!isLoggedIn && (
+            <Button
+              color="inherit"
+              sx={{ color: "#FFF" }}
+              onClick={handleClickOpen}
+            >
+              Login
+            </Button>
+          )}
+
+          {isLoggedIn && (
+            <IconButton color="inherit">
+              <AccountCircle />
+            </IconButton>
+          )}
         </Toolbar>
       </AppBar>
 
