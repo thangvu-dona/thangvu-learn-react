@@ -1,7 +1,7 @@
 import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LockOutlined } from "@mui/icons-material";
-import { Avatar, Button, Typography } from "@mui/material";
+import { Avatar, Button, LinearProgress, Typography } from "@mui/material";
 import InputField from "components/form-controls/InputField";
 import PasswordField from "components/form-controls/PasswordField";
 import PropTypes from "prop-types";
@@ -62,15 +62,18 @@ function RegisterForm(props) {
     // },
   });
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = async (values) => {
     if (!onSubmit) return;
-    onSubmit(values);
+    await onSubmit(values);
 
-    form.reset();
+    // form.reset();
   };
+
+  const { isSubmitting } = form.formState;
 
   return (
     <>
+      {isSubmitting && <LinearProgress />}
       <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
         <LockOutlined />
       </Avatar>
@@ -87,7 +90,13 @@ function RegisterForm(props) {
           form={form}
         />
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button
+          disabled={isSubmitting}
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
           Create an account
         </Button>
       </form>
