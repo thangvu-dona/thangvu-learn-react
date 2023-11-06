@@ -14,8 +14,14 @@ import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
 import Login from "features/Auth/components/Login";
 
+const MODE = {
+  LOGIN: "login",
+  REGISTER: "register",
+};
+
 export default function Header() {
   const [open, setOpen] = React.useState(false);
+  const [mode, setMode] = React.useState(MODE.LOGIN); // state for switching mode
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -73,8 +79,29 @@ export default function Header() {
           <Close />
         </IconButton>
         <DialogContent>
-          {/* <Register closeDialog={handleClose} /> */}
-          <Login closeDialog={handleClose} />
+          {mode === MODE.REGISTER && (
+            <>
+              <Register closeDialog={handleClose} />
+
+              <Box textAlign="center">
+                <Button color="primary" onClick={() => setMode(MODE.LOGIN)}>
+                  Already have an account. Login here!
+                </Button>
+              </Box>
+            </>
+          )}
+
+          {mode === MODE.LOGIN && (
+            <>
+              <Login closeDialog={handleClose} />
+
+              <Box textAlign="center">
+                <Button color="primary" onClick={() => setMode(MODE.REGISTER)}>
+                  Don't have account. Register here!
+                </Button>
+              </Box>
+            </>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
