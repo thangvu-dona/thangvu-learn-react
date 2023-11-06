@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import userApi from "../../api/userApi";
+import userApi from "api/userApi";
 
 // First, create the thunk
 export const register = createAsyncThunk(
@@ -23,12 +23,17 @@ const userSlice = createSlice({
     settings: {},
   },
   reducers: {},
-  extraReducers: {
-    // register.fulfilled is string like: 'users/register/fulfilled'
-    [register.fulfilled]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(register.fulfilled, (state, action) => {
       state.current = action.payload;
-    }
+    })
   },
+  // extraReducers: {
+  //   // register.fulfilled is string like: 'users/register/fulfilled'
+  //   [register.fulfilled]: (state, action) => {
+  //     state.current = action.payload;
+  //   }
+  // },
 });
 
 const { reducer } = userSlice;

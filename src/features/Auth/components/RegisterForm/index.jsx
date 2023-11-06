@@ -1,13 +1,12 @@
 import React from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { LockOutlined } from "@mui/icons-material";
+import { Avatar, Button, Typography } from "@mui/material";
+import InputField from "components/form-controls/InputField";
+import PasswordField from "components/form-controls/PasswordField";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import InputField from "components/form-controls/InputField"; // need jsconfig.json
-import InputField from "../../../../components/form-controls/InputField";
-import { Avatar, Button, Typography, createTheme } from "@mui/material";
-import { LockOutlined } from "@mui/icons-material";
-import PasswordField from "../../../../components/form-controls/PasswordField";
 
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func,
