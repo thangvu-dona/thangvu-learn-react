@@ -10,6 +10,8 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Register from "../../features/Auth/components/Register";
+import { IconButton } from "@mui/material";
+import { Close } from "@mui/icons-material";
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
@@ -66,6 +68,9 @@ export default function Header() {
       </AppBar>
 
       <Dialog open={open} onClose={handleClose}>
+        <IconButton onClick={handleClose}>
+          <Close />
+        </IconButton>
         <DialogContent>
           <Register closeDialog={handleClose} />
         </DialogContent>
