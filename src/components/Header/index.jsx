@@ -9,9 +9,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link, NavLink } from "react-router-dom";
-import Register from "../../features/Auth/components/Register";
+import Register from "features/Auth/components/Register";
 import { IconButton } from "@mui/material";
 import { Close } from "@mui/icons-material";
+import Login from "features/Auth/components/Login";
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
@@ -72,7 +73,8 @@ export default function Header() {
           <Close />
         </IconButton>
         <DialogContent>
-          <Register closeDialog={handleClose} />
+          {/* <Register closeDialog={handleClose} /> */}
+          <Login closeDialog={handleClose} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
