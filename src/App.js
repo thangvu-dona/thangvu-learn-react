@@ -32,7 +32,7 @@ function App() {
         <Route path='/' Component={CounterFeature} exact />
         <Route path='/todos' Component={TodoFeature} />
         <Route path='/albums' Component={AlbumFeature} />
-        <Route path='/products' element={<ProductFeature />} /> {/* version 6 */}
+        <Route path='/products/*' element={<ProductFeature />} /> {/* version 6 */}
       </Routes>
 
       {/* <CounterFeature /> */}
