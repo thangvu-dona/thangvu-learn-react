@@ -4,6 +4,7 @@ import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import productApi from "api/productApi";
 import ProductListSkeleton from "../components/ProductListSkeleton";
+import ProductList from "../components/ProductList";
 
 ListPage.propTypes = {};
 
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     width: "250px",
   },
   right: {
-    flex: "1 1 auto",
+    flex: "1 1 0",
   },
 }));
 
@@ -37,9 +38,9 @@ function ListPage(props) {
         console.log("Fail to fetch product list", error);
       }
 
-      // setLoading(false);
+      setLoading(false);
     })();
-  });
+  }, []);
 
   return (
     <Box>
@@ -53,7 +54,7 @@ function ListPage(props) {
               {loading ? (
                 <ProductListSkeleton />
               ) : (
-                <Typography>Product List</Typography>
+                <ProductList data={productList} />
               )}
             </Paper>
           </Grid>
