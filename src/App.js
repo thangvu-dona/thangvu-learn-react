@@ -7,6 +7,7 @@ import categoryApi from './api/categoryApi';
 import ListPage from './features/Todo/pages/ListPage';
 import CounterFeature from './features/Counter';
 import Header from './components/Header';
+import ProductFeature from 'features/Product';
 
 function App() {
   useEffect(() => {
@@ -31,13 +32,13 @@ function App() {
         <Route path='/' Component={CounterFeature} exact />
         <Route path='/todos' Component={TodoFeature} />
         <Route path='/albums' Component={AlbumFeature} />
+        <Route path='/products' element={<ProductFeature />} /> {/* version 6 */}
       </Routes>
 
       {/* <CounterFeature /> */}
 
       {/* <ListPage /> */}
 
-      Footer
     </div>
   );
 }
