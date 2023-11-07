@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import { Box, Container, Grid, Pagination, Paper } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import productApi from "api/productApi";
 import ProductListSkeleton from "../components/ProductListSkeleton";
@@ -15,13 +15,30 @@ const useStyles = makeStyles((theme) => ({
   },
   right: {
     flex: "1 1 0",
+    paddingBottom: "20px",
+  },
+  pagination: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "center",
+    marginTop: "20px",
+    paddingBottom: "20px",
   },
 }));
 
 function ListPage(props) {
   const classes = useStyles();
   const [productList, setProductList] = useState([]);
+  const [pagination, setPagination] = useState({
+    total: 10,
+    limit: 9,
+    page: 1,
+  });
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({
+    _page: 1,
+    _limit: 9,
+  });
 
   useEffect(() => {
     // async function fetchData() {
@@ -32,15 +49,24 @@ function ListPage(props) {
     // fetchData();
     (async () => {
       try {
-        const { data } = await productApi.getAll({ _page: 1, _limit: 10 });
+        const { data, pagination } = await productApi.getAll(filters);
         setProductList(data);
+        setPagination(pagination);
+        console.log(pagination);
       } catch (error) {
         console.log("Fail to fetch product list", error);
       }
 
       setLoading(false);
     })();
-  }, []);
+  }, [filters]);
+
+  const handlePageChange = (e, page) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      _page: page,
+    }));
+  };
 
   return (
     <Box>
@@ -52,10 +78,19 @@ function ListPage(props) {
           <Grid item className={classes.right}>
             <Paper elevation={0}>
               {loading ? (
-                <ProductListSkeleton />
+                <ProductListSkeleton length={9} />
               ) : (
                 <ProductList data={productList} />
               )}
+              <Box className={classes.pagination}>
+                <Pagination
+                  count={Math.ceil(pagination.total / pagination.limit)}
+                  page={pagination.page}
+                  variant="outlined"
+                  color="primary"
+                  onChange={handlePageChange}
+                />
+              </Box>
             </Paper>
           </Grid>
         </Grid>
