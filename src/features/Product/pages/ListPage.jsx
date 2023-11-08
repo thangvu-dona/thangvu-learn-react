@@ -77,8 +77,9 @@ function ListPage(props) {
       _page: page,
     };
 
+    console.log("location.pathname", location.pathname);
     navigate({
-      pathname: window.location.pathname, // yields: "/products"
+      pathname: location.pathname, // yields: "/products"
       search: queryString.stringify(filters),
     });
   };
@@ -90,7 +91,7 @@ function ListPage(props) {
     };
 
     navigate({
-      pathname: window.location.pathname, // yields: "/products"
+      pathname: location.pathname, // yields: "/products"
       search: queryString.stringify(filters),
     });
   };
@@ -102,14 +103,14 @@ function ListPage(props) {
     };
 
     navigate({
-      pathname: window.location.pathname, // yields: "/products"
+      pathname: location.pathname, // yields: "/products"
       search: queryString.stringify(filters),
     });
   };
 
   const setNewFilters = (newFilters) => {
     navigate({
-      pathname: window.location.pathname, // yields: "/products"
+      pathname: location.pathname, // yields: "/products"
       search: queryString.stringify(newFilters),
     });
   };
